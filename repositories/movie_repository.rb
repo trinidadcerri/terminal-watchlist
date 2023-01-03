@@ -28,7 +28,7 @@ class MovieRepository
 
   def save_json
     saved_data = @movies.map do |movie|
-      {id: movie.id, name: movie.name, description: movie.description, rating: movie.rating, year: movie.year }
+      {id: movie.id, name: movie.name, description: movie.description, rating: movie.rating, year: movie.year}
     end
 
     File.open(@json_file, "wb") do |file|
@@ -37,11 +37,9 @@ class MovieRepository
   end
 
   def load_json
-    searialized_movies = File.read(@json_file)
-    movies = JSON.parse(searialized_movies, {symbolize_names: true})
+    searlized_movies = File.read(@json_file)
+    movies = JSON.parse(searlized_movies, {symbolize_names: true})
     movies.each do |movie|
-      movie[:id] = movie[:id].to_i
-      movie[:rating] = movie[:rating].to_f
       @movies << Movie.new(movie)
     end
     @next_id = @movies.last.id + 1

@@ -3,11 +3,11 @@ require 'json'
 require 'open-uri'
 
 class MoviesApi
-	def query(query)
+  def query(query)
     apikey = "dc68d872f8ea40846e7c7791d8b4b07f"
     url = "https://api.themoviedb.org/3/search/movie?api_key=#{apikey}&query=#{query}"
     movie_serilalized = URI.open(url).read
-    response = JSON.parse(movie_serilalized["results"])
+    response = JSON.parse(movie_serilalized)["results"]
     filter_response(response)
   end
 
@@ -19,7 +19,7 @@ class MoviesApi
         name: film["original_title"],
         description: film["overview"],
         rating: film["vote_average"],
-        year: film["release_date"].split("-").first
+        year: film["release_date"]&.split("-")&.first
       })
     end
   end
