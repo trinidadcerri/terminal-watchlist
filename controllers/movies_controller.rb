@@ -48,11 +48,14 @@ class MoviesController
       selection = gets.chomp
       finish = true if selection == "exit"
 
-      film = results[selection.to_i - 1]
-      @movie_repository.create(film)
+      unless selection == "exit"
+        binding.pry
+        film = results[selection.to_i - 1]
+        @movie_repository.create(film)
 
-      puts "You have saved: #{film.name}"
-      puts "Please select another film to save or 'exit'"
+        puts "You have saved: #{film.name}"
+        puts "Please select another film to save or 'exit'"
+      end
     end
   end
 

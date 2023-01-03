@@ -15,7 +15,6 @@ class MoviesApi
 
   def filter_response(data)
     data.map do |film|
-      # binding.pry
       Movie.new({
         name: film["original_title"],
         description: film["overview"],
